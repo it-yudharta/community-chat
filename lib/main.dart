@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'core/router.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // TODO: Replace with your Supabase project details
+  // Initialize Supabase
   await Supabase.initialize(
     url: 'https://rtvsarndjrceielbolcd.supabase.co',
     anonKey:
@@ -90,29 +92,12 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Community Chat',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system, // Or make this dynamic with a provider
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Community Chat')),
-      body: Center(
-        child: Text(
-          'Welcome to Community Chat!',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-      ),
+      themeMode: ThemeMode.system,
+      routerConfig: router,
     );
   }
 }
